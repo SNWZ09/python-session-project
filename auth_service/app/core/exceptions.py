@@ -13,32 +13,42 @@ from fastapi import HTTPException
 
 #создаем класс, который наследуется от HTTPException
 class BaseHTTPException(HTTPException):
-    'Ошибка на стороне сервера'
-    pass
+    error_num: int = 500
+    detailed_description: str = 'Ошибка на стороне сервера'
+    
+    def __init__(self):
+        #с помощью метода супер() передаем номер ошибки и ее текстовое описание
+        super().__init__(status_code=self.error_num, detail=self.detailed_description)
     
     
 class UserAlreadyExistsError(BaseHTTPException):
-    '409: Пользователь уже существует'
+    error_num = 409
+    detailed_description = '409: Пользователь уже существует'
     pass
     
 class InvalidCredentialsError(BaseHTTPException):
-    '401: Неправильный email или пароль'
+    error_num = 401
+    detailed_description = '401: Неправильный email или пароль'
     pass
     
 class InvalidTokenError(BaseHTTPException):
-    '401: Неправильный токен'
+    error_num = 401
+    detailed_description = '401: Неправильный токен'
     pass
     
 class TokenExpiredError(BaseHTTPException):
-    '401: Токен устарел'
+    error_num = 401
+    detailed_description = '401: Токен устарел'
     pass
     
 class UserNotFoundError(BaseHTTPException):
-    '404: Пользователь не найден'
+    error_num = 404
+    detailed_description = '404: Пользователь не найден'
     pass
     
 class PermissionDeniedError(BaseHTTPException):
-    '403: Отказано в доступе'
+    error_num = 403
+    detailed_description = '403: Отказано в доступе'
     pass
     
 
