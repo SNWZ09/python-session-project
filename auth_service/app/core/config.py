@@ -21,8 +21,6 @@ class Settings(BaseSettings):
     #указываем, что переменные нужно читать из файла .env
     model_config = SettingsConfigDict(
         env_file='.env', 
-        env_file_encoding='utf-8',
-        extra='ignore' # Игнорируем лишние переменные, если они есть
-    )
+        env_file_encoding='utf-8')
     
 settings = Settings()
