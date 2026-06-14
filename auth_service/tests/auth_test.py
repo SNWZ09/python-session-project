@@ -2,6 +2,9 @@
 # + тут нужны асинхронные тесты
 import pytest
 
+#импорт AsyncClient, async и await работали
+from httpx import AsyncClient
+
 # тестовые почта и пароль
 test_email = 'test@mailmail.ru'
 text_passwd = 'test-passwd'
@@ -12,7 +15,7 @@ text_passwd = 'test-passwd'
 # так же надо будет проверить, что указаной почты в бд нет (почта должна быть уникальной)
 # указываем, что тест асинхронный
 @pytest.mark.asyncio
-async def test_auth(test_client):
+async def test_auth(test_client: AsyncClient):
 
     # проверяем указанную почту и пароль
     # делаем это в json, мол, реальный пользователь
@@ -40,7 +43,7 @@ async def test_auth(test_client):
     # проверяем логин
     # теперь отправляем не в json, а в формате OAuth2
     response_for_login = await test_client.post(
-        '/auth/login', data={'email': test_email, 'password': text_passwd}
+        '/auth/login', data={'username': test_email, 'password': text_passwd}
     )
 
     # сервер ответил кодом 200 - круто
@@ -52,7 +55,7 @@ async def test_auth(test_client):
 
     # проверим, что логин с неверным паролем возвращает 401
     response_login_with_wrong_pswd = await test_client.post(
-        '/auth/login', data={'email': test_email, 'password': 'auaua_wrong_passwd'}
+        '/auth/login', data={'username': test_email, 'password': 'auaua_wrong_passwd'}
     )
 
     assert response_login_with_wrong_pswd.status_code == 401

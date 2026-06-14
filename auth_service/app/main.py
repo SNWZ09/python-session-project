@@ -24,7 +24,7 @@ from app.core.exceptions import BaseHTTPException
 def create_app() -> FastAPI:
 
     # название берем из настроек
-    app = FastAPI(title=settings.app_name)
+    app = FastAPI(title=settings.APP_NAME)
 
     # подключаем роутер
     app.include_router(main_router)

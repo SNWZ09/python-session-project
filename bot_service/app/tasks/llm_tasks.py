@@ -20,7 +20,7 @@ bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
 #это нужно, чтобы в случае запроса к боту одним юзером, он не помирал
 #для всех остальных юзеров, а продолжал принимать запросы и 
 #отправлять их в Редис
-@celery_app.task(name='app.tasks.llm_tasks.llm_request')
+@celery_app.task
 def llm_request(tg_chat_id: int, prompt: str):   
     
     #проблема в том, что мы не можем напрямую вызывать асинхронную функцию,

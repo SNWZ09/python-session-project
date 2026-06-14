@@ -15,7 +15,7 @@ from jose import jwt
 #импорт настроек и функции user_text_message из handlers.py
 #тк именно в ней у меня и происходит обработка токена
 from app.core.config import settings
-from app.bot.handlers import user_text_message
+from app.bot.handlers import user_text_message, token_check
 
 #создаем фейк-сообщение
 def create_fake_message(text: str, chat_id: int = 255981) -> Message:
@@ -28,6 +28,11 @@ def create_fake_message(text: str, chat_id: int = 255981) -> Message:
     
     msg.chat = AsyncMock(spec=Chat)
     msg.chat.id = chat_id
+    
+    #делаем answer тоже асинхронным, а то тесты падают
+    #именно из-за этого
+    msg.answer = AsyncMock()
+    
     return msg
     
 #первый тест
@@ -41,10 +46,10 @@ async def test_handler_saves_token(fake_redis):
     
     #создаем фейковое сообщение функцией fake_message
     #в которое зашиваем токен
-    fake_message = create_fake_message(text=token, chat_id=255981)
+    fake_message = create_fake_message(text=f'/token {token}', chat_id=255981)
     
     #запускаем обработчик
-    await user_text_message(fake_message)
+    await token_check(fake_message)
     
     #проверяем, что запись в fake_redis появилась
     #'проверяете, что токен действительно сохранился в 
@@ -82,7 +87,7 @@ async def test_handler_no_token_message(fake_redis):
     #args получит кортеж со всеми строками
     #Прошу прощения, тут нейросеть подсказала, как нормально получить ответ бота
     args, _ = fake_message.answer.call_args
-    assert 'С токеном что-то не та' in args[0]
+    assert 'Где??' in args[0]
 
 
 #третий тест

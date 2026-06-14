@@ -6,11 +6,7 @@ from celery import Celery
 from app.core.config import settings
 
 celery_app = Celery(
-            'need_to_answer',
+            'worker',
             broker = settings.RABBITMQ_URL,
-            backend = settings.REDIS_URL)
-            
-#из задания копируем строчку, 'чтобы llm_request
-#не падала с KeyError'
-celery_app.autodiscover_tasks(['app.tasks'])
-
+            backend = settings.REDIS_URL,
+            include = ['app.tasks.llm_tasks'])
