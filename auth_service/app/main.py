@@ -44,7 +44,7 @@ def create_app() -> FastAPI:
     #для быстрой проверки сервера
     @app.get('/health', tags=['health'])
     async def health_check():
-        return {'status': 'ok', 'environment': settings.env}
+        return {'status': 'ok', 'environment': settings.ENV}
         
     #обработчик исключений 
     #FastAPI берет ошибку, переводит всё в JSONResponse и покажет юзеру
