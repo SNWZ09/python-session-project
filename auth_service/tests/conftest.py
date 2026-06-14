@@ -44,7 +44,7 @@ TestSessionLocal = async_sessionmaker(
 #как я понял, если этого не сделать, то тесты будут либо падать, либо не запускаться
 #так как в оперативной памяти не будет таблиц
 @pytest.fixture(autouse=True)
-async def create_test_db():
+async def test_create_db():
     async with engine_for_test.begin() as conn:
         #cоздаем бд
         await conn.run_sync(Base.metadata.create_all)

@@ -3,7 +3,7 @@
 from app.core.security import hash_password, verify_password, create_access_token, decode_token
 
 #проверка того, как хешируется пароль
-def password_hashing_test():
+def test_password_hashing():
     raw_password = 'password_test_123'
     
     #хешируем пароль
@@ -24,7 +24,7 @@ def password_hashing_test():
 #затем декодируете его через decode_token и проверяете,
 #что в payload присутствуют sub, role, iat, exp,
 #и что sub и role совпадают с теми, что вы передавали.'
-def jwt_gen_test():
+def test_jwt_gen():
     user_id = 123
     role = 'admin'
     
