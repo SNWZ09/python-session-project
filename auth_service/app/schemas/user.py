@@ -15,4 +15,4 @@ class UserPublic(BaseModel):
     created_at: datetime
     
     #чтобы FastAPI мог возвращать ORM-объекты напрямую как схему
-    model_config = {"from_attributes": True}
+    model_config = {'from_attributes': True}

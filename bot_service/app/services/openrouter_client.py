@@ -39,7 +39,7 @@ async def call_openrouter_client(prompt: str) -> str:
     #(модель и история сообщений)
     payload = {
         'model': settings.OPENROUTER_MODEL,
-        'messages': [{"role": "user", "content": prompt}]
+        'messages': [{'role': 'user', 'content': prompt}]
     }
     
     #теперь нужно открыть клиент для связи с 'интернетом'

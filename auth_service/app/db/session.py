@@ -19,7 +19,7 @@ engine = create_async_engine(
 )
 
 #создаем фабрику сессий
+#чтобы после сохранения мы могли читать данные expire_on_commit=False
 AsyncSessionLocal = async_sessionmaker(
     engine,
-    expire_on_commit=False, #чтобы после сохранения мы могли читать данные
-)
+    expire_on_commit=False)
