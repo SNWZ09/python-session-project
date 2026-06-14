@@ -20,7 +20,7 @@ async def test_call_openrouter_client():
     
     #'Вы поднимаете мок-роут на POST https://openrouter.ai/api/v1/chat/completions'
     #из задания
-    url = f'settings.OPENROUTER_BASE_URL}/chat/completions'
+    url = f'{settings.OPENROUTER_BASE_URL}/chat/completions'
     
     #создаем фековый ответ
     fake_openrouter_response = {'choices': [
@@ -38,7 +38,7 @@ async def test_call_openrouter_client():
     #эта строчка закрепляет, что если кто-то делает запрос на тот url, что мы указали - этот
     #запрос ловится, потом в return_value помещается муляж ответа fake_openrouter_response
     #и статус-код 200, мол, всё прошло хорошо
-    mock_route = respx.post(url).mock(return_value=httpx.Response(200, json=fake_response_json))
+    mock_route = respx.post(url).mock(return_value=httpx.Response(200, json=fake_openrouter_response))
     
     #теперь вызываем call_openrouter_client, который попытается выйти в сеть
     openrouter_client_result = await call_openrouter_client('Угабуга донкиконг')
