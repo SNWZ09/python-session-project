@@ -5,9 +5,8 @@
 #sub извлекается корректно. Второй тест должен проверять,
 #что мусорная строка вместо токена вызывает ошибку. 
 #Это нужно, чтобы доказать, что бот не “верит любому тексту”.'
-#импорт pytest, jwt, settings и decode_and_validate
+#импорт jwt, settings и decode_and_validate
 
-import pytest
 from jose import jwt
 from app.core.config import settings
 from app.core.jwt import decode_and_validate

@@ -82,3 +82,6 @@ async def get_current_user_id(token: str = Depends(oauth2_scheme),
         #возвращаем пользователя
         return current_user
         
+    except ValueError:
+        raise InvalidTokenError
+        

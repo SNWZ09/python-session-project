@@ -78,7 +78,7 @@ async def user_text_message(message: Message):
     #если пользователь неавторизован - может быть он прислал токен
     #поэтому пытаемся его расшифровать и проверить
     try:
-        payload = decode_and_validate(user_text)
+        decode_and_validate(user_text)
         
         #если ошибка не вылезла - был прислан правильный токен
         #записываем в Редис, что пользователь отныне авторизован

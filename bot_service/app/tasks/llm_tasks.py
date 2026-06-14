@@ -46,7 +46,7 @@ async def process_llm_request(tg_chat_id: int, prompt: str):
         await bot.send_message(chat_id=tg_chat_id, text=response_text_with_context)
      
     #если что-то где-то упало - выкидываем ошибку
-    except Exception as e:
+    except Exception:
         await bot.send_message(
             chat_id=tg_chat_id, 
             text='*Фух* ааааа, как я запыхался... *Дышит* *Пытается отдышаться*. Что-то *выдыхнул ртом* поломалось... *Тяжко дышит*. *Умирает*.')
