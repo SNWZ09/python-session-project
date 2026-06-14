@@ -10,7 +10,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
 #импорт настроек (нам потребуется sqlite_path)
 from app.core.config import settings
 
-SQLALCHEMY_DATABASE_URL = f'sqlite+aiosqlite:///{settings.sqlite_path}'
+SQLALCHEMY_DATABASE_URL = f'sqlite+aiosqlite:///{settings.SQLITE_PATH}'
 
 #создаем engine
 engine = create_async_engine(

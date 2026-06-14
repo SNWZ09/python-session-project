@@ -9,14 +9,14 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 #класс для управления настройками приложения 
 class Settings(BaseSettings):
-    app_name: str
-    env: str
+    APP_NAME: str
+    ENV: str
 
-    jwt_secret: str
-    jwt_alg: str
-    access_token_expire_minutes: int
+    JWT_SECRET: str
+    JWT_ALG: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
 
-    sqlite_path: str
+    SQLITE_PATH: str
     
     #указываем, что переменные нужно читать из файла .env
     model_config = SettingsConfigDict(

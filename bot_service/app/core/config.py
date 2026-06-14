@@ -12,25 +12,25 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 #класс для управления настройками приложения 
 class Settings(BaseSettings):
-    app_name: str
-    env: str
+    APP_NAME: str
+    ENV: str
 
-    jwt_secret: str
-    jwt_alg: str
+    JWT_SECRET: str
+    JWT_ALG: str
 
-    openrouter_api_key: str
-    openrouter_base_url: str
-    openrouter_model: str
-    openrouter_site_url: str
-    openrouter_app_name: str
+    OPENROUTER_API_KEY: str
+    OPENROUTER_BASE_URL: str
+    OPENROUTER_MODEL: str
+    OPENROUTER_SITE_URL: str
+    OPENROUTER_APP_NAME: str
     
     #токен телеграм-бота
-    bot_token: str
+    TELEGRAM_BOT_TOKEN: str
     
     #url для подключения к брокеру задач и хранилищу
     #все ссылки подтянутся из .env
-    rabbitmq_url: str
-    redis_url: str
+    RABBITMQ_URL: str
+    REDIS_URL: str
     
     #указываем, что переменные нужно читать из файла .env
     model_config = SettingsConfigDict(

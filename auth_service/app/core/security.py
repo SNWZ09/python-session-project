@@ -36,7 +36,7 @@ def create_access_token(user_id: int, role: str) -> str:
     #вычисляем, когда токен истечёт
     #для этого берем текущее время и прибавляем к нему
     #количество минут, указанных в настройках
-    expire = datetime.now(timezone.utc) + timedelta(minutes=settings.access_token_expire_minutes)
+    expire = datetime.now(timezone.utc) + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     
     #запоминаем время выдачи токена
     iat = datetime.now(timezone.utc)
@@ -53,7 +53,7 @@ def create_access_token(user_id: int, role: str) -> str:
     #секретным ключом с помощью алгоритма 
     #(всё берётся из config.py)
     #и получаем итоговый токен
-    return jwt.encode(payload, settings.jwt_secret, algorithm = settings.jwt_alg)
+    return jwt.encode(payload, settings.JWT_SECRET, algorithm = settings.JWT_ALG)
     
 #теперь осталось создать функцию декодирования токена
 #используем те же данные, что и в jwt.encode
@@ -74,7 +74,7 @@ def create_access_token(user_id: int, role: str) -> str:
 def decode_token(token: str) -> dict | None:
     try:
         #пытаемся декодировать
-        encoded_payload = jwt.decode(token, settings.jwt_secret, algorithms = [settings.jwt_alg])
+        encoded_payload = jwt.decode(token, settings.JWT_SECRET, algorithms = [settings.JWT_ALG])
         return encoded_payload
     
     except JWTError:
